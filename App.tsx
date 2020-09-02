@@ -1,14 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler'
+import { StatusBar } from 'expo-status-bar'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
 import LoginPage from './src/pages/Login'
+import LoggedArea from './src/containers/LoggedArea'
+
+const Stack = createStackNavigator()
 
 const App = () => (
-  <View style={styles.container}>
-    <LoginPage />
+  <NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Login"
+        component={LoginPage}
+      />
+      <Stack.Screen
+        name="LoggedArea"
+        component={LoggedArea}
+      />
+    </Stack.Navigator>
     <StatusBar style="auto" />
-  </View>
+  </NavigationContainer>
 )
 
 export default App
