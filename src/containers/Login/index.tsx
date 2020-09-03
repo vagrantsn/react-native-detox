@@ -36,6 +36,7 @@ const LoginContainer = ({
           value={values.password}
         />
         <Button
+          testID="login"
           onPress={handleSubmit}
           title="Login"
         />
