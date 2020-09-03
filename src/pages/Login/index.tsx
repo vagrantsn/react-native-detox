@@ -2,38 +2,24 @@ import React from 'react'
 
 import LoginContainer from '../../containers/Login'
 
-const loginRequest = (data: object) => (
-  fetch('https://api.pagar.me/1/sessions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  })
-    .then(async (res) => {
-      const parsed = await res.json()
-      if (!res.ok) {
-        throw parsed
-      }
-
-      return parsed
-    })
-)
+import loginRequest from './request'
 
 interface PropTypes {
   navigation: any,
 }
 
+interface SubmitProps {
+  email: string,
+  password: string,
+}
+
 const LoginPage = ({ navigation }: PropTypes) => {
 
   const handleSubmit = (
-    { email, password }: { email: string, password: string }
-  ) => {
-    loginRequest({ email, password })
-      .then(() => {
-        navigation.navigate('LoggedArea')
-      })
-  }
+    { email, password }: SubmitProps
+  ) => loginRequest({ email, password }).then(() => (
+    navigation.navigate('LoggedArea')
+  ))
 
   return (
     <LoginContainer
