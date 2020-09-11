@@ -7,6 +7,14 @@ The tests run on the app's production version, which must be built with `yarn de
 
 ## Issues I had when setting up Detox environment
 
+### OpenJDK 8
+
+Detox + Expo currently depende on Java 1.8 or OpenJDK 8
+
+### Use an open source emulator
+
+Follow the instructions for installing as per [Detox documentation](https://github.com/wix/Detox/blob/master/docs/Introduction.AndroidDevEnv.md#android-aosp-emulators)
+
 ### Error while dexing
 
 Solved by limiting gradlew tasks to the app project, by adding `app` prefix to `build` command on `.detoxrc.json`:
