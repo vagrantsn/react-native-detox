@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Button,
   StyleSheet,
   Text,
   View,
@@ -14,9 +15,16 @@ const styles = StyleSheet.create({
   },
 })
 
-const LoggedArea = () => (
+type PropTypes = {
+  onClick: Function,
+}
+
+const LoggedArea = ({ onClick }: PropTypes) => (
   <View style={styles.container}>
-    <Text>Welcome to LoggedArea</Text>
+    <Button
+      title="Welcome to LoggedArea"
+      onPress={onClick}
+    />
   </View>
 )
 
