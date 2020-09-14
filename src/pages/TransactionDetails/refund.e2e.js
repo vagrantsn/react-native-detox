@@ -1,9 +1,14 @@
+require('dotenv').config()
+
 import buildRequest from '../../utils/buildRequest'
 
 const login = () => buildRequest({
   method: 'POST',
   path: '/sessions',
-  body: { email: '', password: '' },
+  body: {
+    email: process.env.E2E_PAGARME_EMAIL,
+    password: process.env.E2E_PAGARME_PASSWORD,
+  },
 })
 
 const createTransaction = sessionId => buildRequest({

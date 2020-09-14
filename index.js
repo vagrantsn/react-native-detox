@@ -1,8 +1,8 @@
-import { registerRootComponent } from 'expo';
+import { registerRootComponent } from 'expo'
 
-import Root from './Root';
+import Root from './Root'
 
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in the Expo client or in a native build,
 // the environment is set up appropriately
-registerRootComponent(Root);
+registerRootComponent(Root)
