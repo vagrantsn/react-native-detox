@@ -77,3 +77,19 @@ android {
 ```
 
 [Source on StackOverflow](https://stackoverflow.com/questions/59044161/react-native-expiring-daemon-because-jvm-heap-space-is-exhausted?noredirect=1&lq=1)
+
+### App Crashing
+
+If you get an invariant error in iOS talking about "Safe Area" or an Android error like the one below:
+
+```
+09-14 12:38:26.343  5648  5672 E AndroidRuntime: FATAL EXCEPTION: mqt_native_modules
+09-14 12:38:26.343  5648  5672 E AndroidRuntime: Process: com.vagners.expoapp, PID: 5648
+09-14 12:38:26.343  5648  5672 E AndroidRuntime: com.facebook.react.common.JavascriptException: Invariant Violation: requireNativeComponent: "RNCSafeAreaProvider" was not found in the UIManager.
+```
+
+That means that you should verify the `react-native-safe-area-context` library version. Run:
+
+`yarn why react-native-safe-area-context`
+
+It should show a single installed package. If expo is using a different version, update the package.json version to match it (in the case of this prototype, we had to set it to @3.0.7). Having this dep duplicated will result in errors and different behavior between iOS and Android, so always check on both if/when you update this package's version.
