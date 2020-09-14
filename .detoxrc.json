@@ -1,6 +1,6 @@
 {
   "testRunner": "jest",
-  "runnerConfig": "src/tests/e2e/config.json",
+  "runnerConfig": "e2e/config.json",
   "configurations": {
     "ios": {
       "type": "ios.simulator",
