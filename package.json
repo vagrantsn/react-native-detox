@@ -1,12 +1,15 @@
 {
   "scripts": {
     "start": "react-native start",
+    "start:e2e": "RN_SRC_EXT=e2e.ts,e2e.tsx react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
+    "e2e": "detox build --configuration android.release && detox test --configuration android.release",
     "detox-build:release": "detox build --configuration android.release",
     "detox-test:release": "detox test --configuration android.release",
-    "e2e": "detox build --configuration android.release && detox test --configuration android.release"
+    "detox-build:debug": "detox build --configuration android.debug",
+    "detox-test:debug": "detox test --configuration android.debug"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",

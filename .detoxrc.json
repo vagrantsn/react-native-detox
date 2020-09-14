@@ -11,19 +11,15 @@
     },
     "android.debug": {
       "binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
-      "build": "cd android && ./gradlew app:assembleDebug app:assembleAndroidTest -DtestBuildType=debug && cd ..",
+      "build": "cd android && RN_SRC_EXT=e2e.ts,e2e.tsx ./gradlew app:assembleDebug app:assembleAndroidTest -DtestBuildType=debug && cd ..",
       "type": "android.emulator",
-      "device": {
-        "avdName": "Pixel_2_API_28"
-      }
+      "device": { "avdName": "Pixel_2_API_28" }
     },
     "android.release": {
       "binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
       "build": "cd android && RN_SRC_EXT=e2e.ts,e2e.tsx ./gradlew app:assembleRelease app:assembleAndroidTest -DtestBuildType=release && cd ..",
       "type": "android.emulator",
-      "device": {
-        "avdName": "Pixel_2_API_28"
-      }
+      "device": { "avdName": "Pixel_2_API_28" }
     }
   }
 }
