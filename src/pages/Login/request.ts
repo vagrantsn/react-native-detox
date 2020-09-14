@@ -1,19 +1,9 @@
-const loginRequest = (data: object) => (
-  fetch('https://api.pagar.me/1/sessions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data)
-  })
-    .then(async (res) => {
-      const parsed = await res.json()
-      if (!res.ok) {
-        throw parsed
-      }
+import buildRequest from '../../utils/buildRequest'
 
-      return parsed
-    })
-)
+const loginRequest = (data: object) => buildRequest({
+  method: 'POST',
+  body: data,
+  path: '/sessions',
+})
 
 export default loginRequest
