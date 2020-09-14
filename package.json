@@ -36,6 +36,7 @@
     "detox": "^17.4.4",
     "jest": "26.4.2",
     "jest-circus": "26.4.2",
+    "react-native-launch-arguments": "1.0.0",
     "react-test-renderer": "~16.11.0",
     "typescript": "~3.9.5"
   },
