@@ -4,12 +4,45 @@ This is an example of ejected Expo application integrated with Detox + Jest, usi
 
 The tests run on the app's production version, which must be built with `yarn detox-build:release` before running the tests with `yarn detox-test:release`
 
+## Setup
+
+### Mac OS
+
+#### Java
+
+On MacOS, to install OpenJDK 8, run the following:
+
+```
+brew tap adoptopenjdk/openjdk
+brew cask install adoptopenjdk8
+java -version
+```
+
+A window will pop-up saying that java is asking for file access permissions. Allow it and you should be ready to go!
+
+#### Android SDK
+
+After installing, you must add it to path, like so:
+
+```
+printf '\nexport ANDROID_HOME=/Users/"$USER"/Library/Android/sdk\nexport ANDROID_SDK_ROOT=$ANDROID_HOME\n' >> ~/.bash_profile
+```
 
 ## Issues I had when setting up Detox environment
 
 ### OpenJDK 8
 
 Detox + Expo currently depende on Java 1.8 or OpenJDK 8
+
+On MacOS, to install OpenJDK 8, run the following:
+
+```
+brew tap adoptopenjdk/openjdk
+brew cask install adoptopenjdk8
+java -version
+```
+
+A window will pop-up saying that java is asking for file access permissions. Allow it and you should be ready to go!
 
 ### Use an open source emulator
 
