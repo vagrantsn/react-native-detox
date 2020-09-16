@@ -9,15 +9,12 @@ import LoginPage from './pages/Login'
 import LoggedArea from './pages/LoggedArea'
 import Transactions from './pages/Transactions'
 import TransactionDetails from './pages/TransactionDetails'
-import {
-  useUserSessionDispatch,
-} from './sessionContext'
+
+import client from './utils/client'
 
 const Stack = createStackNavigator()
 
 const App = () => {
-  const setSessionId = useUserSessionDispatch()
-
   const linking = {
     prefixes: ['e2e://'],
     config: {
@@ -29,10 +26,10 @@ const App = () => {
     },
   }
 
-  const { sessionId } = LaunchArguments.value()
+  const { apiKey } = LaunchArguments.value()
 
-  if (sessionId) {
-    setSessionId(sessionId)
+  if (apiKey) {
+    client.authenticate({ api_key: apiKey })
   }
 
   return (
