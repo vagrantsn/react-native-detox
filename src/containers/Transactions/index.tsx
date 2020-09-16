@@ -7,11 +7,18 @@ import {
 } from 'react-native'
 
 type Transaction = {
+  amount: number,
+  customer: {
+    name: string,
+  },
   id: number,
 }
 
 type Props = {
   transactions: Array<Transaction>,
+  onItemPress: Function,
+  onRefresh: any,
+  refreshing: boolean,
 }
 
 const styles = StyleSheet.create({
@@ -23,23 +30,33 @@ const styles = StyleSheet.create({
 })
 
 const Item = ({
-  id,
+  item,
   onPress,
-}) => (
-  <TouchableHighlight onPress={() => onPress(id)}>
-    <Text style={styles.item}>{id}</Text>
+}: { item: Transaction, onPress: Function }) => (
+  <TouchableHighlight
+    testID={item.id.toString()}
+    onPress={() => onPress(item.id)}
+  >
+    <Text style={styles.item}>
+      {item.customer.name} - R${item.amount}
+    </Text>
   </TouchableHighlight>
 )
 
 const TransactionsContainer = ({
   transactions,
   onItemPress,
+  onRefresh,
+  refreshing,
 }: Props) => (
   <FlatList
+    testID="flatList"
     data={transactions}
+    onRefresh={onRefresh}
+    refreshing={refreshing}
     renderItem={({ item }) => (
       <Item
-        id={item.id}
+        item={item}
         onPress={onItemPress}
       />
     )}

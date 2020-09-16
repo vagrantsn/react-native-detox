@@ -6,9 +6,18 @@ import client from '../../utils/client'
 
 const TransactionsPage = ({ navigation }) => {
   const [transactions, setTransactions] = useState([])
+  const [refreshing, setRefreshing] = useState(false)
+
+  const fetchData = () => {
+    setRefreshing(true)
+
+    client.transactions.findAll({ status: 'paid' })
+      .then(setTransactions)
+      .then(() => setRefreshing(false))
+  }
 
   useEffect(() => {
-    client.transactions.findAll().then(setTransactions)
+    fetchData()
   }, [])
 
   const handleItemPress = (transactionId) => {
@@ -21,6 +30,8 @@ const TransactionsPage = ({ navigation }) => {
     <TransactionsContainer
       onItemPress={handleItemPress}
       transactions={transactions}
+      onRefresh={fetchData}
+      refreshing={refreshing}
     />
   )
 }
