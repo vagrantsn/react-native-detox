@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-import buildRequest from '../../utils/buildRequest'
+import buildRequest from '../../../utils/buildRequest'
 
 const apiKey = process.env.E2E_API_KEY
 
@@ -30,25 +30,28 @@ const createTransaction = () => buildRequest({
   },
 })
 
-describe('Transaction details', () => {
-  beforeAll(async () => {
-    const { id: transactionId } = await createTransaction()
+describe('Transactions List', () => {
+  it('should not show the refunded transaction on the list', async () => {
+    const transaction = await createTransaction()
+
+    await sleep(5000) // wait for ElasticSearch
 
     await device.launchApp({
       newInstance: true,
-      url: `e2e://TransactionDetails?id=${transactionId}`,
-      launchArgs: { apiKey }
+      url: 'e2e://Transactions',
+      launchArgs: { apiKey },
     })
-  })
 
-  it('should show a transaction with paid status', async () => {
-    await expect(element(by.text('paid'))).toBeVisible()
-  })
+    await element(by.id(transaction.id.toString())).tap()
 
-  it('should refund a transaction successfully', async () => {
-    await element(by.id('refundButton')).tap()
+    await element(by.text('REFUND')).tap()
 
-    await expect(element(by.text('refunded'))).toBeVisible()
-    await expect(element(by.id('refundButton'))).toBeNotVisible()
+    await device.pressBack()
+
+    await sleep(5000) // wait for ElasticSearch
+
+    await element(by.id('flatList')).swipe('down', 'fast', 0.5)
+
+    await expect(element(by.id(transaction.id.toString()))).toBeNotVisible()
   })
 })
