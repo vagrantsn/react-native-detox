@@ -1,6 +1,11 @@
 {
   "testRunner": "jest",
   "runnerConfig": "e2e/config.json",
+  "behavior": {
+    "init": {
+      "launchApp": false
+    }
+  },
   "configurations": {
     "ios": {
       "type": "ios.simulator",
