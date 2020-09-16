@@ -6,7 +6,7 @@
         "<rootDir>/../src/"
     ],
     "testMatch": [
-        "**/*.e2e.js"
+        "**/src/tests/e2e/**/*.e2e.js"
     ],
     "reporters": ["detox/runners/jest/streamlineReporter"],
     "verbose": true
