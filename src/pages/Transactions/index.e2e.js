@@ -2,20 +2,13 @@ require('dotenv').config()
 
 import buildRequest from '../../utils/buildRequest'
 
-const login = () => buildRequest({
-  method: 'POST',
-  path: '/sessions',
-  body: {
-    email: process.env.E2E_PAGARME_EMAIL,
-    password: process.env.E2E_PAGARME_PASSWORD,
-  },
-})
+const apiKey = process.env.E2E_API_KEY
 
-const createTransaction = sessionId => buildRequest({
+const createTransaction = () => buildRequest({
   method: 'POST',
   path: '/transactions',
   body: {
-    session_id: sessionId,
+    api_key: apiKey,
     amount: 1000,
     card_number: '4242424242424242',
     card_holder_name: 'JOHN DOVE',
@@ -42,9 +35,7 @@ describe('Transactions list', () => {
     let transactionId
 
     beforeAll(async () => {
-      const { session_id: sessionId } = await login()
-
-      const { id } = await createTransaction(sessionId)
+      const { id } = await createTransaction()
       transactionId = id.toString()
 
       // wait for ElasticSearch index
@@ -53,7 +44,7 @@ describe('Transactions list', () => {
       await device.launchApp({
         newInstance: true,
         url: 'e2e://Transactions',
-        launchArgs: { sessionId }
+        launchArgs: { apiKey }
       })
     })
 
