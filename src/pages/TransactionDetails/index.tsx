@@ -1,27 +1,30 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import TransactionDetailsContainer from '../../containers/TransactionDetails'
 
 import client from '../../utils/client'
 
+type PropTypes = {
+  route: {
+    params: {
+      id: number,
+    },
+  },
+}
+
 const TransactionDetails = ({
   route,
-}) => {
-  const [transaction, setTransaction] = useState({})
+} : PropTypes) => {
   const transactionId = route.params.id
 
-  useEffect(() => {
-    client.transactions.findOne(transactionId).then(setTransaction)
-  }, [])
-
-  const handleRefund = () => {
-    client.transactions.refund(transactionId).then(setTransaction)
+  const providers = {
+    getTransaction: () => client.transactions.findOne(transactionId),
+    refundTransaction: () => client.transactions.refund(transactionId),
   }
 
   return (
     <TransactionDetailsContainer
-      transaction={transaction}
-      onRefund={handleRefund}
+      providers={providers}
     />
   )
 }
